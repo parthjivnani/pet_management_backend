@@ -10,7 +10,6 @@ lerna-debug.log*
 # Dependency directories
 package-lock.json
 node_modules/
-.env
 
 # folders
 dist
