@@ -12,7 +12,7 @@ export default class AdoptionUtils {
     const existing = await Adoption.findOne({
       pet: petId,
       user: userId,
-      status: "pending",
+      status: "Pending",  
     });
     if (existing) throw new Error("ALREADY_APPLIED");
     const adoption = await Adoption.create({
@@ -64,12 +64,12 @@ export default class AdoptionUtils {
   public approve = async (id: string) => {
     const adoption = await Adoption.findByIdAndUpdate(
       id,
-      { status: "approved", modifiedOn: new Date() },
+      { status: "Approved", modifiedOn: new Date() },
       { new: true },
     ).populate(["pet", "user"]);
     if (!adoption) throw new Error("ADOPTION_NOT_FOUND");
     await Pet.findByIdAndUpdate(adoption.pet, {
-      status: "adopted",
+      status: "Adopted",
       modifiedOn: new Date(),
     });
     return adoption;
@@ -78,7 +78,7 @@ export default class AdoptionUtils {
   public reject = async (id: string) => {
     const adoption = await Adoption.findByIdAndUpdate(
       id,
-      { status: "rejected", modifiedOn: new Date() },
+      { status: "Rejected", modifiedOn: new Date() },
       { new: true },
     ).populate(["pet", "user"]);
     if (!adoption) throw new Error("ADOPTION_NOT_FOUND");

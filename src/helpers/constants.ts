@@ -118,8 +118,8 @@ export default class CONSTANTS {
     ADOPTION_APPLICATION_SUBMITTED:
       "Adoption application submitted successfully",
     ADOPTION_FETCHED_SUCCESSFULLY: "Adoption applications fetched successfully",
-    ADOPTION_APPROVED: "Adoption application approved",
-    ADOPTION_REJECTED: "Adoption application rejected",
+    ADOPTION_APPROVED: "Adoption application Approved",
+    ADOPTION_REJECTED: "Adoption application Rejected",
     ADOPTION_NOT_FOUND: "Adoption application not found",
     PET_NOT_AVAILABLE: "Pet is not Available for Adoption",
     ALREADY_APPLIED: "You have already applied for this pet",

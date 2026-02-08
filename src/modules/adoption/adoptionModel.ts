@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-export type AdoptionStatus = "pending" | "approved" | "rejected";
+export type AdoptionStatus = "Pending" | "Approved" | "Rejected";
 
 export interface IAdoption extends Document {
   pet: Schema.Types.ObjectId;
@@ -16,8 +16,8 @@ const AdoptionSchema = new Schema<IAdoption>({
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
   status: {
     type: String,
-    enum: ["pending", "approved", "rejected"],
-    default: "pending",
+    enum: ["Pending", "Approved", "Rejected"],
+    default: "Pending",
   },
   message: { type: String, default: "" },
   createdOn: { type: Date, default: Date.now },
