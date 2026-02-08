@@ -2,6 +2,7 @@
 import { isEmpty } from "lodash";
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { ResponseBuilder } from "../../helpers/responseBuilder";
 import CONSTANTS from "../../helpers/constants";
 import AuthService from "../../helpers/authService";
@@ -23,6 +24,7 @@ const {
     PASSWORD_CHANGE_SUCESSFULLY,
     FAILED,
     FORGOT_PASSWORD_LINK_EXPIRED,
+    INAVLID_TOKEN,
     FORGOT_PASSWORD_LINK_SEND,
     EMAIL_INVALID,
     EMAIL_EXIST,
@@ -262,6 +264,7 @@ export default class AuthController {
             null,
           );
         }
+        await User.updateOne({ email }, { isPasswordReset: true });
         res
           .status(OK)
           .json(
@@ -277,6 +280,75 @@ export default class AuthController {
       }
     } catch (err) {
       this.responseBuilder.responseContent(res, 500, false, INTERNAL_SERVER);
+    }
+  };
+
+  /**
+   * Reset password with token from request body (e.g. from frontend reset page with token in URL)
+   * @param req body: { token, password }
+   * @param res
+   * @description Verifies token, then resets password if valid
+   */
+  public resetPasswordWithToken = async (req: Request, res: Response) => {
+    try {
+      const { token, password } = req.body;
+      if (!token || !password) {
+        return this.responseBuilder.responseContent(
+          res,
+          BAD_REQ,
+          false,
+          "Token and password are required.",
+        );
+      }
+      let decoded: { email?: string };
+      try {
+        decoded = jwt.verify(token, process.env.JWT_SECRET) as {
+          email?: string;
+        };
+      } catch {
+        return this.responseBuilder.responseContent(
+          res,
+          401,
+          false,
+          INAVLID_TOKEN,
+        );
+      }
+      const email = decoded?.email;
+      if (!email) {
+        return this.responseBuilder.responseContent(
+          res,
+          401,
+          false,
+          INAVLID_TOKEN,
+        );
+      }
+      const user = await User.findOne({ email });
+      if (!user || user.isPasswordReset) {
+        return this.responseBuilder.responseContent(
+          res,
+          403,
+          false,
+          FORGOT_PASSWORD_LINK_EXPIRED,
+        );
+      }
+      const hashPassword = await this.utils.encryptPassword(password);
+      await User.updateOne(
+        { email },
+        { password: hashPassword, isPasswordReset: true },
+      );
+      return this.responseBuilder.responseContent(
+        res,
+        OK,
+        true,
+        PASSWORD_CHANGE_SUCESSFULLY,
+      );
+    } catch (err) {
+      return this.responseBuilder.responseContent(
+        res,
+        INTERNAL_SERVER_ERROR_CODE,
+        false,
+        INTERNAL_SERVER,
+      );
     }
   };
 }
