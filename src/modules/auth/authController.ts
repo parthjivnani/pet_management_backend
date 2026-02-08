@@ -25,15 +25,17 @@ const {
     FORGOT_PASSWORD_LINK_EXPIRED,
     FORGOT_PASSWORD_LINK_SEND,
     EMAIL_INVALID,
+    EMAIL_EXIST,
     NOT_FOUND,
+    BAD_REQ,
   },
 } = CONSTANTS;
 
 export default class AuthController {
-  private authService: AuthService;
-  private responseBuilder: ResponseBuilder;
+  private readonly authService: AuthService;
+  private readonly responseBuilder: ResponseBuilder;
   private emailService: EmailService;
-  private utils: Utils;
+  private readonly utils: Utils;
 
   constructor() {
     this.authService = new AuthService();
@@ -58,16 +60,30 @@ export default class AuthController {
    * @returns
    * @description Signup
    */
-  public signup = async (req: Request | any, res: Response) => {
+  public signup = async (req: Request , res: Response) => {
     try {
       const { body } = req;
       const { firstName, lastName, email, password } = body;
+
+      const existingUser = await User.findOne({ email });
+      if (!isEmpty(existingUser)) {
+        return this.responseBuilder.responseContent(
+          res,
+          BAD_REQ,
+          false,
+          EMAIL_EXIST,
+        );
+      }
+
+      const userCount = await User.countDocuments();
+      const role = userCount === 0 ? "admin" : "user";
+
       const createUser = await User.create({
         firstName,
         lastName,
         email,
         password: await bcrypt.hash(password, 10),
-        role: "user",
+        role,
       });
 
       return this.responseBuilder.responseContent(
@@ -78,6 +94,7 @@ export default class AuthController {
         createUser,
       );
     } catch (err) {
+      console.log(err);
       return this.responseBuilder.responseContent(
         res,
         INTERNAL_SERVER_ERROR_CODE,
@@ -94,7 +111,7 @@ export default class AuthController {
    * @returns
    * @description Login
    */
-  public login = async (req: Request | any, res: Response) => {
+  public login = async (req: any, res: Response) => {
     try {
       const { password, email } = req.body;
       const user = await User.findOne({ email });
