@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import Adoption from "./adoptionModel";
 import Pet from "../pet/petModel";
 
@@ -7,7 +6,7 @@ export default class AdoptionUtils {
     const pet = await Pet.findOne({
       _id: petId,
       isDeleted: { $ne: true },
-      status: "available",
+      status: "Available",  
     });
     if (!pet) throw new Error("PET_NOT_AVAILABLE");
     const existing = await Adoption.findOne({

@@ -29,7 +29,7 @@ export default class PetUtils {
     } else if (status) {
       match.status = status;
     } else {
-      match.status = "available";
+      match.status = "Available";
     }
     if (species) match.species = new RegExp(species, "i");
     if (breed) match.breed = new RegExp(breed, "i");
