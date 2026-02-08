@@ -12,7 +12,6 @@ import routesLogger from "../middleware/routesLogger";
 import { ResponseBuilder } from "../helpers/responseBuilder";
 import Log from "../helpers/logger";
 import CONSTANTS from "../helpers/constants";
-import sequelize from "../config/db";
 import mongoose from "mongoose";
 const session = require("express-session");
 import mongodb from "../config/db";
