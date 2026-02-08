@@ -123,5 +123,10 @@ export default class CONSTANTS {
     ADOPTION_NOT_FOUND: "Adoption application not found",
     PET_NOT_AVAILABLE: "Pet is not available for adoption",
     ALREADY_APPLIED: "You have already applied for this pet",
+    SPECIES_CREATED_SUCCESSFULLY: "Species created successfully",
+    SPECIES_FETCHED_SUCCESSFULLY: "Species fetched successfully",
+    SPECIES_UPDATED_SUCCESSFULLY: "Species updated successfully",
+    SPECIES_DELETED_SUCCESSFULLY: "Species deleted successfully",
+    SPECIES_NOT_FOUND: "Species not found",
   };
 }
