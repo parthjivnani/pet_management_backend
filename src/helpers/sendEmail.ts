@@ -17,8 +17,8 @@ export default class EmailService {
       service: "gmail",
       secure: false,
       auth: {
-        user: "parthjivnani786@gmail.com",
-        pass: "tpwawhfbzbbyygxv",
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
     });
     try {
