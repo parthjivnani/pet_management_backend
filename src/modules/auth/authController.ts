@@ -60,7 +60,7 @@ export default class AuthController {
    * @returns
    * @description Signup
    */
-  public signup = async (req: Request , res: Response) => {
+  public signup = async (req: Request, res: Response) => {
     try {
       const { body } = req;
       const { firstName, lastName, email, password } = body;
@@ -194,12 +194,27 @@ export default class AuthController {
 
         const url = `${process.env.SITE_URL}/${pathName}/${token}`;
 
+        const resetEmailHtml = `
+          <p>Hello ${firstName},</p>
+          <p>You requested a password reset for Pet Adoption System. Click the link below to reset your password:</p>
+          <p><a href="${url}" style="color: #0066cc;">Reset Password</a></p>
+          <p>Or copy and paste this URL in your browser:</p>
+          <p>${url}</p>
+          <p>This link will expire in 30 minutes.</p>
+          <p>If you did not request this, please ignore this email.</p>
+        `;
+
+        await this.emailService.sendMail({
+          to: email,
+          subject: "Reset your password",
+          html: resetEmailHtml,
+        });
+
         return this.responseBuilder.responseContent(
           res,
           OK,
           true,
           FORGOT_PASSWORD_LINK_SEND,
-          { forgotPasswordLink: url },
         );
       } else {
         return this.responseBuilder.responseContent(

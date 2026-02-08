@@ -1,8 +1,8 @@
 export default {
   openapi: '3.0.1',
   info: {
-    description: 'This is CMS POC Node API using TypeScript',
-    title: 'CMS POC Node API',
+    description: 'This is  Node API using TypeScript',
+    title: 'Node API',
     license: {
       name: 'Apache 2.0',
       url: 'http://www.apache.org/liscences/LIS',

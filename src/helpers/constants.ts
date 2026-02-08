@@ -55,7 +55,7 @@ export default class CONSTANTS {
     SETTING_EXISTS: "Setting name already exists.",
     SUBSCRIPTION_EXISTS: "Subscription name already exists.",
     USER_EXISTS: "User name already exists.",
-    FORGOT_PASSWORD_LINK_SEND: "Forgot password link sent.",
+    FORGOT_PASSWORD_LINK_SEND: "Reset password link sent to your email.",
     FORGOT_PASSWORD_LINK_EXPIRED:
       "This link has been used earlier and is no longer valid.",
     FAILED: "FAILED.",
