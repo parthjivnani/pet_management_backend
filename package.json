@@ -1,5 +1,5 @@
 {
-  "name": "category-management",
+  "name": "pet-management",
   "private": true,
   "scripts": {
     "dev": "nodemon src/app/index.ts",

@@ -14,16 +14,12 @@ export default class EmailService {
   private logger = Log.getLogger();
   public sendMail = async ({ to, html, subject }: ISendMail) => {
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      auth: {
-        user: process.env.SMTP_USER_NAME,
-        pass: process.env.SMTP_PASSWORD,
-      },
-      tls: {
-        rejectUnauthorized: false,
-      },
+      service: "gmail",
       secure: false,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
     });
     try {
       const info = await transporter.sendMail({

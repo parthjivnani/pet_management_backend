@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-export type PetStatus = "available" | "adopted";
+export type PetStatus = "Available" | "Adopted";
 
 export interface IPet extends Document {
   name: string;
@@ -24,8 +24,8 @@ const PetSchema = new Schema<IPet>({
   imageUrl: { type: String, default: "" },
   status: {
     type: String,
-    enum: ["available", "adopted"],
-    default: "available",
+    enum: ["Available", "Adopted"],
+    default: "Available",
   },
   isDeleted: { type: Boolean, default: false },
   createdOn: { type: Date, default: Date.now },

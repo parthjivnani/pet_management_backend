@@ -55,7 +55,7 @@ export default class CONSTANTS {
     SETTING_EXISTS: "Setting name already exists.",
     SUBSCRIPTION_EXISTS: "Subscription name already exists.",
     USER_EXISTS: "User name already exists.",
-    FORGOT_PASSWORD_LINK_SEND: "Forgot password link sent.",
+    FORGOT_PASSWORD_LINK_SEND: "Reset password link sent to your email.",
     FORGOT_PASSWORD_LINK_EXPIRED:
       "This link has been used earlier and is no longer valid.",
     FAILED: "FAILED.",
@@ -118,10 +118,15 @@ export default class CONSTANTS {
     ADOPTION_APPLICATION_SUBMITTED:
       "Adoption application submitted successfully",
     ADOPTION_FETCHED_SUCCESSFULLY: "Adoption applications fetched successfully",
-    ADOPTION_APPROVED: "Adoption application approved",
-    ADOPTION_REJECTED: "Adoption application rejected",
+    ADOPTION_APPROVED: "Adoption application Approved",
+    ADOPTION_REJECTED: "Adoption application Rejected",
     ADOPTION_NOT_FOUND: "Adoption application not found",
-    PET_NOT_AVAILABLE: "Pet is not available for adoption",
+    PET_NOT_AVAILABLE: "Pet is not Available for Adoption",
     ALREADY_APPLIED: "You have already applied for this pet",
+    SPECIES_CREATED_SUCCESSFULLY: "Species created successfully",
+    SPECIES_FETCHED_SUCCESSFULLY: "Species fetched successfully",
+    SPECIES_UPDATED_SUCCESSFULLY: "Species updated successfully",
+    SPECIES_DELETED_SUCCESSFULLY: "Species deleted successfully",
+    SPECIES_NOT_FOUND: "Species not found",
   };
 }
