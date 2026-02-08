@@ -1,7 +1,7 @@
-import * as nodemailer from 'nodemailer';
-import { isEmpty } from 'lodash';
-import * as Handlebars from 'handlebars';
-import Log from './logger';
+import nodemailer from "nodemailer";
+import { isEmpty } from "lodash";
+import Handlebars from "handlebars";
+import Log from "./logger";
 
 interface ISendMail {
   to: string;

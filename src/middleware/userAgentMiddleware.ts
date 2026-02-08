@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import * as UAParser from 'ua-parser-js';
-import { Request, Response, NextFunction } from 'express';
+import UAParser from "ua-parser-js";
+import { Request, Response, NextFunction } from "express";
 
 const parseUserAgent = (
   req: Request | any,
   res: Response,
   next: NextFunction,
 ) => {
-  const userAgent = req.headers['user-agent'];
+  const userAgent = req.headers["user-agent"];
   const parser = new UAParser();
   const parsedUserAgent = parser.setUA(userAgent).getResult();
   req.deviceData = {

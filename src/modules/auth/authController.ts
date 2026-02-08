@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { isEmpty } from "lodash";
 import { Request, Response } from "express";
-import * as bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 import { ResponseBuilder } from "../../helpers/responseBuilder";
 import CONSTANTS from "../../helpers/constants";
 import AuthService from "../../helpers/authService";

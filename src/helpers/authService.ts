@@ -1,4 +1,4 @@
-import * as jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
 export default class AuthService {
   /*
@@ -28,7 +28,7 @@ export default class AuthService {
    * generateToken
    */
   public generateCookieToken = (res, data) => {
-    const token = this.getAuthToken(data, '7d');
+    const token = this.getAuthToken(data, "7d");
     res.locals.token = token;
     return res;
   };

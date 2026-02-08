@@ -1,6 +1,6 @@
-import * as jwt from 'jsonwebtoken';
-import { Request, Response, NextFunction } from 'express';
-import CONSTANTS from '../helpers/constants';
+import jwt from "jsonwebtoken";
+import { Request, Response, NextFunction } from "express";
+import CONSTANTS from "../helpers/constants";
 
 const { INAVLID_TOKEN, UNAUTHORIZED } = CONSTANTS.MESSAGES;
 const authenticateAPI = async (
